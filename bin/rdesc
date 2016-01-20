@@ -1,0 +1,106 @@
+#!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
+
+# Tools
+def _colorize(text, color_code)
+  "\e[#{color_code}m#{text}\e[0m"
+end
+
+def _model(text)
+  model = text.downcase
+  name = ""
+  model.split("_").each do |w|
+    name += w.capitalize
+  end
+  puts _colorize(name, 33)
+end
+
+def _section(text)
+  puts _colorize(text, 32)
+end
+
+# Info extractors
+def model_validations(model)
+  _section "[Validations]"
+  puts `grep "validate" "app/models/#{model}.rb" || echo "Warning: No validation found"`
+end
+
+def model_associations(model)
+  _section "[Associations]"
+  associations = []
+  associations << `grep "belongs_to" "app/models/#{model}.rb"`
+  associations << `grep "has_many" "app/models/#{model}.rb"`
+  associations << `grep "has_one" "app/models/#{model}.rb"`
+  associations << `grep "has_and_belongs_to_many" "app/models/#{model}.rb"`
+  associations.each do |a|
+    puts a unless a.length < 3 # avoid empty lines
+  end
+end
+
+def model_description(model)
+  _section "[Table description]"
+
+  file = File.new("db/schema.rb", "r")
+  while (line = file.gets)
+    if line.include?("  create_table \"#{model}s\"")
+      puts line
+      while (line = file.gets)
+        puts line
+        break if line == "  end\n"
+      end
+      break
+    end
+  end
+  file.close
+end
+
+# Main
+
+# ..Usage
+if ARGV.count == 0
+  $stderr.puts "Usage: rdesc model model2 ..."
+  exit 1
+end
+
+# ..Look for the project's root path
+back = "./"
+maxdepth = 6
+while maxdepth > 0
+  break if File.exists?(back + "Gemfile")
+  back += "../"
+  maxdepth -= 1
+end
+if maxdepth == 0
+  $stderr.puts "Error: no rails project found."
+  exit 2
+end
+pwd = Dir.pwd
+Dir.chdir back
+
+# ..List
+if ARGV.count == 1 and ARGV[0] == "-l"
+  puts `cd app/models && ls *.rb | sed 's/\.rb//g'`
+  exit 0
+end
+
+# ..Output
+ARGV.each do |m|
+  model = m.downcase
+  _model model
+
+  if File.exists?("app/models/#{model}.rb")
+    model_associations(model)
+    puts ""
+    model_validations(model)
+    puts ""
+    model_description(model)
+  else
+    $stderr.puts "Model not found."
+  end
+  _model "---"
+  puts ""
+end
+
+Dir.chdir pwd
+
+exit 0

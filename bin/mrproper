@@ -1,0 +1,4 @@
+#!/bin/bash
+
+find . | grep '~$'
+rm -rf `find . | grep '~$'`

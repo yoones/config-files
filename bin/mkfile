@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ -f Makefile ]; then
+    echo "Let's not overwrite your current Makefile ;)"
+    exit 1
+fi
+
+cat <<EOF | base64 -d > Makefile
+IyMKIyMKIyMKIyMKCkNDCQk9CWdjYwpOQU1FCQk9CXBvYwoKU1JDUwkJPQltYWluLmMKCk9CSlMJ
+CT0JJChTUkNTOi5jPS5vKQoKQ0ZMQUdTCQkrPQktVyAtV2FsbCAtV2V4dHJhCkNGTEFHUwkJKz0J
+LWcKQ0ZMQUdTCQkrPQktSSAuCgpMREZMQUdTCQk9CgpSTQkJPQlybSAtcmYKCmFsbAkJOgkkKE5B
+TUUpCgokKE5BTUUpCQk6CSQoT0JKUykKCQkJJChDQykgLW8gJChOQU1FKSAkKE9CSlMpICQoTERG
+TEFHUykKCmNsZWFuCQk6CgkJCSQoUk0pICQoTkFNRSkKCmZjbGVhbgkJOgljbGVhbgoJCQkkKFJN
+KSAkKE9CSlMpCgpyZQkJOglmY2xlYW4gYWxsCgouUEhPTlkJCToJYWxsIGNsZWFuIGZjbGVhbiBy
+ZQo=
+EOF
+
+exit 0

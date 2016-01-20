@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ -f "./x.sh" ]; then
+    echo "Error: x.sh already exists"
+    exit 1
+fi
+
+cat <<EOF > ./x.sh
+#!/bin/bash
+
+EOF
+
+chmod +x x.sh
+
+exit 0

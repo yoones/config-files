@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ -f "main.c" ]; then
+    echo "Let's not overwrite your current main.c ;)"
+    exit 1
+fi
+
+cat > main.c <<EOF
+/*
+**
+**
+*/
+
+#include <stdio.h>
+
+int	main(int argc, char **argv)
+{
+
+  return (0);
+}
+EOF
+
+exit 0

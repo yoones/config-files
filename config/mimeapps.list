@@ -1,0 +1,37 @@
+[Default Applications]
+video/mp4=vlc.desktop
+x-scheme-handler/http=userapp-Iceweasel-MWVN3X.desktop
+x-scheme-handler/https=userapp-Iceweasel-MWVN3X.desktop
+x-scheme-handler/ftp=userapp-Iceweasel-MWVN3X.desktop
+x-scheme-handler/chrome=userapp-Iceweasel-MWVN3X.desktop
+text/html=userapp-Iceweasel-MWVN3X.desktop
+application/x-extension-htm=userapp-Iceweasel-MWVN3X.desktop
+application/x-extension-html=userapp-Iceweasel-MWVN3X.desktop
+application/x-extension-shtml=userapp-Iceweasel-MWVN3X.desktop
+application/xhtml+xml=userapp-Iceweasel-MWVN3X.desktop
+application/x-extension-xhtml=userapp-Iceweasel-MWVN3X.desktop
+application/x-extension-xht=userapp-Iceweasel-MWVN3X.desktop
+video/x-msvideo=vlc.desktop
+video/x-matroska=vlc.desktop
+audio/mpeg=vlc.desktop
+video/x-flv=vlc.desktop
+
+[Added Associations]
+video/mp4=org.gnome.Totem.desktop;vlc.desktop;
+x-scheme-handler/http=userapp-Iceweasel-MWVN3X.desktop;
+x-scheme-handler/https=userapp-Iceweasel-MWVN3X.desktop;
+x-scheme-handler/ftp=userapp-Iceweasel-MWVN3X.desktop;
+x-scheme-handler/chrome=userapp-Iceweasel-MWVN3X.desktop;
+text/html=userapp-Iceweasel-MWVN3X.desktop;
+application/x-extension-htm=userapp-Iceweasel-MWVN3X.desktop;
+application/x-extension-html=userapp-Iceweasel-MWVN3X.desktop;
+application/x-extension-shtml=userapp-Iceweasel-MWVN3X.desktop;
+application/xhtml+xml=userapp-Iceweasel-MWVN3X.desktop;
+application/x-extension-xhtml=userapp-Iceweasel-MWVN3X.desktop;
+application/x-extension-xht=userapp-Iceweasel-MWVN3X.desktop;
+video/x-msvideo=vlc.desktop;
+video/x-matroska=vlc.desktop;
+audio/mpeg=vlc.desktop;
+video/x-flv=vlc.desktop;
+application/vnd.apple.mpegurl=vlc.desktop;
+application/pdf=pdfmod.desktop;

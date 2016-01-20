@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ "$#" != "1" ]; then
+    echo "Usage: gen-sshkey WHATFOR"
+    exit 1
+fi
+
+ssh-keygen -b 4096 -f ~/.ssh/id_rsa_"$1" -C yoones@"$1"

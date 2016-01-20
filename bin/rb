@@ -1,0 +1,39 @@
+#!/bin/bash
+
+if [ -f "poc.rb" ]; then
+    echo "Let's not overwrite your current poc.rb ;)"
+    exit 1
+fi
+
+if [ "$1" == "--json" ]; then
+cat > poc.rb <<EOF
+#!/usr/bin/env ruby
+require "json"
+
+def readfile(file)
+  fd = File.open(file) or die "Error: open(#{file}) failed"
+  fd.readlines { |line| }
+end
+
+def readjsonfile(file)
+  data = File.read(file)
+  JSON.parse(data)
+end
+
+EOF
+else
+cat > poc.rb <<EOF
+#!/usr/bin/env ruby
+
+def readfile(file)
+  fd = File.open(file) or die "Error: open(#{file}) failed"
+  fd.readlines { |line| }
+end
+
+EOF
+
+fi
+
+chmod +x poc.rb
+
+exit 0

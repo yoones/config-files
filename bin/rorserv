@@ -1,0 +1,10 @@
+#!/bin/bash
+
+sessname="ror-server"
+
+tmux new-session -d -s $sessname
+tmux selectp -t $sessname
+tmux send-keys -t $sessname 'rails server' Enter
+tmux split-window -v
+tmux send-keys -t $sessname 'rake jobs:work' Enter
+tmux attach -t $sessname

@@ -1,0 +1,13 @@
+[user]
+	email = younes.serraj@gmail.com
+	name = Younes Serraj
+[push]
+	default = simple
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	df = diff
+[core]
+	editor = emacs -nw

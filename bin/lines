@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ "$#" != "2" ]; then
+    echo "Usage: lines from count"
+    echo "Using standard input, it reads (count) lines starting from line (from)"
+    exit 1
+fi
+
+from="$1"
+count="$2"
+cat | head -n $(( $from + $count - 1 )) | tail -n $count

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ "$#" == "2" ] && [ "$1" == "-l" ]; then
+    i=0
+    head -n 1 "$2" | tr ';' '\n' | while read field; do
+	i=$((i+1))
+	printf "%d\t%s\n" "$i" "$field"
+    done
+elif [ "$#" == "1" ]; then
+    head -n 1 "$1"
+else
+    head -n 1
+fi
