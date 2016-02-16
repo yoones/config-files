@@ -8,6 +8,19 @@ fi
 cat <<EOF > ./x.sh
 #!/bin/bash
 
+if [ "\$#" != "0" ]; then
+    echo "Error: I need x arguments."
+    echo "Usage: \$0 arg1 arg2"
+fi
+
+i=0
+while read line; do
+    i=\$((i+1))
+    if [ "\$line" != "" ]; then
+
+    fi
+done
+
 EOF
 
 chmod +x x.sh
