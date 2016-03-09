@@ -21,7 +21,7 @@ begin
   i = 1
   page.css('div[class=def-content]').each do |d|
     definition = d.text.gsub("\n", "")
-    puts "#{i}. #{definition}"
+    puts "#{i}. #{definition.strip}"
     i += 1
   end
   exit 0
