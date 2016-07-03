@@ -17,13 +17,21 @@ sudo apt-get dist-upgrade
 
 # install default packages
 sudo apt-get install emacs vlc htop gcc g++ build-essential nmap most make binutils \
-     git unzip unrar valgrind gdb gimp tree
+     git unzip unrar valgrind gdb gimp tree gnome-tweak-tool
 
 mkdir -p ~/personal ~/projects
 
 cd ~/projects/
 git clone https://github.com/yoones/config-files.git
 cd config-files
+cp -r my ~/.my
 cp bashrc ~/.bashrc
 cp gitconfig ~/.gitconfig
 cp mimeapps.list ~/.config/mimeapps.list
+bash < ./dconf_shortcuts
+dconf load /org/gnome/terminal/legacy/profiles:/ < ./gnome_term_config
+
+cd ~/projects
+git clone https://github.com/yoones/railsondeb.git
+cd railsondeb
+./railsondeb install

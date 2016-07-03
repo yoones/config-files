@@ -2,5 +2,3 @@
 
 alias gop="cd $HOME/projects"
 alias gotmp="cd /tmp/toto"
-alias godl="cd ~/downloads"
-alias dl="cd ~/downloads"
