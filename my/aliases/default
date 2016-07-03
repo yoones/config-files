@@ -1,0 +1,18 @@
+#!/bin/bash
+
+alias l='ls'
+alias ll='ls -l'
+alias lla='ll -a'
+alias lld='ll -d'
+alias llh='ll -h'
+alias llah='ll -ah'
+alias clean='rm -f *~ ; rm -f .*~ ; rm -f \#*\#'
+alias ccl='clean ; clear ; pwd ; ll'
+alias ne='emacs -nw'
+alias sne='sudo emacs -nw'
+alias df='df -h'
+alias j='jobs'
+alias catx='hexdump -C'
+alias bc="\bc -q"
+alias m="most"
+alias pg='ping -c 1 google.com'

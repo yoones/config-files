@@ -1,0 +1,8 @@
+#!/bin/bash
+
+alias gdb="\gdb -q"
+alias v='valgrind --track-origins=yes --leak-check=full'
+alias make='clear ; /usr/bin/make'
+alias fclean='make fclean'
+alias xmake='make re > /dev/null'
+alias st="clear ; git st"

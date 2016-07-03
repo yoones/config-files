@@ -8,7 +8,7 @@ sudo apt-get dist-upgrade
 
 # install default packages
 sudo apt-get install emacs vlc htop dfc gcc build-essential g++ nmap most make binutils \
-     tmux nasm git subversion unzip wireshark clang valgrind gdb gimp unrar
+     tmux nasm git subversion unzip wireshark clang valgrind gdb gimp unrar tree
 
 # install obs-studio
 sudo add-apt-repository ppa:obsproject/obs-studio
