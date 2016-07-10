@@ -1,5 +1,21 @@
 #!/bin/bash
 
+if ! which sudo > /dev/null; then
+    su root -c "apt-get install sudo && useradd -G sudo username"
+    echo Please reboot and restart this script
+    exit 1
+fi
+
+cat /etc/group | grep "^sudo:" | grep yoones > /dev/null
+if [ "$?" != "0" ]; then
+    cat <<EOF 
+Something is wrong. At this point, you should be in the sudo group
+but you're not. Please fix it then restart this script.
+If needed, reboot your computer too.
+EOF
+    exit 1
+fi
+
 sudo cat > /etc/apt/sources.list <<EOF
 deb http://ftp.fr.debian.org/debian/ jessie main contrib non-free
 deb-src http://ftp.fr.debian.org/debian/ jessie main contrib non-free
@@ -17,7 +33,7 @@ sudo apt-get dist-upgrade
 
 # install default packages
 sudo apt-get install emacs vlc htop gcc g++ build-essential nmap most make binutils \
-     git unzip unrar valgrind gdb gimp tree gnome-tweak-tool
+     git unzip unrar valgrind gdb gimp tree gnome-tweak-tool flashplugin-nonfree
 
 mkdir -p ~/personal ~/projects
 
