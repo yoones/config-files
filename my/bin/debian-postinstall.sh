@@ -32,8 +32,10 @@ sudo apt-get update
 sudo apt-get dist-upgrade
 
 # install default packages
-sudo apt-get install emacs vlc htop gcc g++ build-essential nmap most make binutils \
-     git unzip unrar valgrind gdb gimp tree gnome-tweak-tool flashplugin-nonfree
+sudo apt-get install emacs vlc htop gcc g++ build-essential nmap most\
+     make binutils git unzip unrar valgrind gdb gimp tree gnome-tweak-tool\
+     flashplugin-nonfree firmware-iwlwifi python3-pip pdfmod nasm\
+     qemu-system-x86
 
 mkdir -p ~/personal ~/projects
 
