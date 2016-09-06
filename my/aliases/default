@@ -13,6 +13,7 @@ alias sne='sudo emacs -nw'
 alias df='df -h'
 alias j='jobs'
 alias catx='hexdump -C'
+alias h='hexdump -C'
 alias bc="\bc -q"
 alias m="most"
 alias pg='ping -c 1 google.com'

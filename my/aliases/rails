@@ -6,3 +6,19 @@ alias rc='rails c'
 # alias rd="rdesc"
 # alias rr="rrout"
 alias migrate="rake db:migrate"
+alias goc="gor && cd app/controllers"
+alias gom="gor && cd app/models"
+alias gov="gor && cd app/views"
+alias goa="gor && cd app/assets"
+
+function gor()
+{
+    path=`find_rails_app_root.rb`
+    if [ "$?" == "0" ]; then
+	cd $path
+	return 0
+    else
+	echo "Error: no rails app found" > /dev/stderr
+	return 1
+    fi
+}

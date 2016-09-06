@@ -8,11 +8,17 @@ fi
 if [ "$1" == "--json" ]; then
 cat > poc.rb <<EOF
 #!/usr/bin/env ruby
+
 require "json"
 
 def readfile(file)
   fd = File.open(file) or die "Error: open(#{file}) failed"
-  fd.readlines { |line| }
+  lines = []
+  fd.readlines.each do |line|
+    lines << line.gsub("\n", "").gsub("\r", "")
+  end
+  fd.close
+  lines.reject { |line| line.empty? }
 end
 
 def readjsonfile(file)
@@ -27,7 +33,12 @@ cat > poc.rb <<EOF
 
 def readfile(file)
   fd = File.open(file) or die "Error: open(#{file}) failed"
-  fd.readlines { |line| }
+  lines = []
+  fd.readlines.each do |line|
+    lines << line.gsub("\n", "").gsub("\r", "")
+  end
+  fd.close
+  lines.reject { |line| line.empty? }
 end
 
 EOF
