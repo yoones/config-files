@@ -10,7 +10,6 @@ alias goc="gor && cd app/controllers"
 alias gom="gor && cd app/models"
 alias gov="gor && cd app/views"
 alias goa="gor && cd app/assets"
-alias gogem="gogems"
 
 function gor()
 {
@@ -26,7 +25,7 @@ function gor()
 
 function gogems()
 {
-    path=`find_rails_gems.rb`
+    path=`find_ruby_gems.rb`
     if [ "$?" == "0" ]; then
 	cd $path
 	return 0
