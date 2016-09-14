@@ -10,6 +10,8 @@ alias goc="gor && cd app/controllers"
 alias gom="gor && cd app/models"
 alias gov="gor && cd app/views"
 alias goa="gor && cd app/assets"
+alias gogem="find_rails_gems.rb"
+alias gogems=gogem
 
 function gor()
 {
