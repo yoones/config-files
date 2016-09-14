@@ -17,6 +17,7 @@ cd version
 cd "lib/ruby/gems"
 version = `ls -dt * | head -n 1 | tr -d '\n'`
 cd version
+cd "gems"
 
 puts Dir.pwd
 

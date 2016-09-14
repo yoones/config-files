@@ -10,8 +10,7 @@ alias goc="gor && cd app/controllers"
 alias gom="gor && cd app/models"
 alias gov="gor && cd app/views"
 alias goa="gor && cd app/assets"
-alias gogem="find_rails_gems.rb"
-alias gogems=gogem
+alias gogem="gogems"
 
 function gor()
 {
@@ -21,6 +20,18 @@ function gor()
 	return 0
     else
 	echo "Error: no rails app found" > /dev/stderr
+	return 1
+    fi
+}
+
+function gogems()
+{
+    path=`find_rails_gems.rb`
+    if [ "$?" == "0" ]; then
+	cd $path
+	return 0
+    else
+	echo "Error: folder found" > /dev/stderr
 	return 1
     fi
 }
