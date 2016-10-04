@@ -4,7 +4,14 @@
 already_played = []
 
 while true
-  title = `wmctrl -l | grep Firefox | cut -d ' ' -f 5- | sed 's/ - Spotify - Mozilla Firefox//g' | tr -d '\n'`
+  titles = `wmctrl -l | grep Firefox | cut -d ' ' -f 5- | sed 's/ - Spotify - Mozilla Firefox//g'`.split("\n")
+  title = ""
+  titles.each do |t|
+    if t[0] == "▶"
+      title = t
+      break
+    end
+  end
   if title[0] != "▶"
     `pkill pacat`
     sleep 0.1
