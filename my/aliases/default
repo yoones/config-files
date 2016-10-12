@@ -17,3 +17,4 @@ alias h='hexdump -C'
 alias bc="\bc -q"
 alias m="most"
 alias pg='ping -c 1 google.com'
+alias wif="watch ifconfig"
