@@ -52,7 +52,7 @@ mkdir -p ~/personal ~/projects
 cd ~/projects/
 git clone https://github.com/yoones/config-files.git
 cd config-files
-ln -s . $HOME/.my
+ln -s $HOME/projects/config-files/my $HOME/.my
 cp bashrc ~/.bashrc
 cp gitconfig ~/.gitconfig
 cp mimeapps.list ~/.config/mimeapps.list
