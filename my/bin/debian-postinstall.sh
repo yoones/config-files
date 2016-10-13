@@ -20,7 +20,7 @@ EOF
 
 if ! which sudo > /dev/null; then
     su root -c "cp $tmp_sources_file /etc/apt/sources.list"
-    su root -c "apt-get update && apt-get install sudo && useradd -G sudo $USERNAME"
+    su root -c "apt-get update && apt-get install sudo && usermod -G sudo $USERNAME"
     echo Please logout/reboot and restart this script
     exit 1
 fi
@@ -39,10 +39,10 @@ fi
 
 # update/upgrade system
 sudo apt-get update
-sudo apt-get dist-upgrade
+sudo apt-get dist-upgrade -y
 
 # install default packages
-sudo apt-get install emacs vlc htop gcc g++ build-essential nmap most \
+sudo apt-get install -y emacs vlc htop gcc g++ build-essential nmap most \
      make binutils git unzip unrar valgrind gdb gimp tree gnome-tweak-tool \
      flashplugin-nonfree firmware-iwlwifi pdfmod nasm
      # qemu-system-x86 python3-pip
@@ -65,8 +65,11 @@ cd railsondeb
 ./railsondeb install
 
 # install virtualbox
-sudo apt-get install build-essential linux-headers-`uname -r` dkms
-sudo apt-get install virtualbox
+sudo apt-get install -y build-essential linux-headers-`uname -r` dkms
+sudo apt-get install -y virtualbox
 
 # install obs studio
-./obsondeb
+cd ~/projects
+git clone https://github.com/yoones/obsondeb.git
+cd obsondeb
+./obsondeb install
