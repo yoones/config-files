@@ -1,7 +1,52 @@
 #!/bin/bash
 
-ROOTPATH="$HOME/.obs-studio"
+# Name		: obsondeb
+# Version	: 1.0
+# Author	: Younes SERRAJ
+# Description	: Install obs-studio on a debian
+
+version="1.0"
+magictag="#obsondeb"
+
+ROOTPATH="$HOME/.obsondeb"
 SOURCES="$ROOTPATH/sources"
+
+function usage()
+{
+    cat <<EOF
+Usage: obsondeb <command>
+
+Some useful obsondeb commands are:
+   help        Display this information
+   version     Display obsondeb version
+   install     Install obs-studio and all its dependencies
+   uninstall   Uninstall obs-studio, ffmpeg, libvpx and libx265
+
+You can get the latest version at https://github.com/yoones/obsondeb
+EOF
+}
+
+function uninstall()
+{
+    sudo apt-get remove -y obs-studio
+    sudo apt-get remove -y ffmpeg
+    sudo apt-get remove -y libvpx
+    sudo apt-get remove -y libx265
+    sudo rm -rf $ROOTPATH
+}
+
+function __checkinstall()
+{
+    sudo checkinstall \
+	 -D \
+	 -y \
+	 --pkgname="$1" \
+	 --maintainer="Younes SERRAJ <younes.serraj@gmail.com>" \
+	 --fstrans=no \
+	 --backup=no \
+    	 --pkgversion="$(date +%Y%m%d)-git" \
+	 --deldoc=yes
+}
 
 function install_dependencies()
 {
@@ -27,17 +72,16 @@ function compile_and_install_libx265()
 {
     cd $SOURCES
     hg clone https://bitbucket.org/multicoreware/x265
-    cd $SOURCES/x265/build/linux
+    cd x265/build/linux
     cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=/usr -DENABLE_SHARED:bool=on ../../source
     make
-    sudo checkinstall --pkgname=libx265 --fstrans=no --backup=no \
-    	 --pkgversion="$(date +%Y%m%d)-git" --deldoc=yes
+    __checkinstall libx265
     make clean
 }
 
 function compile_and_install_libvpx()
 {
-    cd $ROOTPATH
+    cd $SOURCES
     wget http://storage.googleapis.com/downloads.webmproject.org/releases/webm/libvpx-1.5.0.tar.bz2
     tar xjvf libvpx-1.5.0.tar.bz2
     cd libvpx-1.5.0
@@ -48,8 +92,7 @@ function compile_and_install_libvpx()
 	--disable-examples \
 	--disable-unit-tests
     make
-    sudo checkinstall --pkgname=libvpx --fstrans=no --backup=no \
-    	 --pkgversion="$(date +%Y%m%d)-git" --deldoc=yes
+    __checkinstall libvpx
     make clean
 }
 
@@ -76,8 +119,7 @@ function compile_and_install_ffmpeg()
 	--enable-libx265 \
 	--enable-nonfree
     make
-    sudo checkinstall --pkgname=ffmpeg --fstrans=no --backup=no \
-    	 --pkgversion="$(date +%Y%m%d)-git" --deldoc=yes
+    __checkinstall ffmpeg
     make distclean
     hash -r
 }
@@ -91,43 +133,67 @@ function compile_and_install_obs_studio()
     mkdir -p build && cd build
     cmake -DUNIX_STRUCTURE=1 -DCMAKE_INSTALL_PREFIX=/usr ..
     make -j4
-    sudo checkinstall --pkgname=obs-studio --fstrans=no --backup=no \
-    	 --pkgversion="$(date +%Y%m%d)-git" --deldoc=yes
+    __checkinstall obs-studio
+    make clean
 }
 
-function main()
+function install_all()
 {
-    if [ -d $ROOTPATH ]; then
-    	echo Directory already exists, aborting to prevent data loss/corruption > /dev/stderr
-    	exit 1
+    echo "* Check for existing install of obsondeb..."
+
+    # Check for existing install of obsondeb
+    if [ -d "$ROOTPATH" ]; then
+	echo "  obsondeb seems to exist already."
+	read -p "  Delete current install (y/n)? " choice
+	if [ "$choice" != "y" ]; then
+	    echo "Installation aborted."
+	    popd > /dev/null
+	    exit 1
+	fi
     fi
+    uninstall
+
+    set -e
+
     mkdir -p -- "$ROOTPATH"
     mkdir -p -- "$SOURCES"
 
-    pushd . > /dev/null 2> /dev/null
-
-    ORANGE='\033[0;33m'
-    NC='\033[0m'
-
-    printf "${ORANGE}*** Install dependencies...${NC}\n"
+    echo "* Install dependencies......"
     install_dependencies
 
-    printf "${ORANGE}*** Compile and install libx265${NC}\n"
+    echo "* Compile and install libx265..."
     compile_and_install_libx265
 
-    printf "${ORANGE}*** Compile and install libvpx${NC}\n"
+    echo "* Compile and install libvpx..."
     compile_and_install_libvpx
 
-    printf "${ORANGE}*** Compile and install ffmpeg${NC}\n"
+    echo "* Compile and install ffmpeg..."
     compile_and_install_ffmpeg
 
-    printf "${ORANGE}*** Compile and install obs-studio${NC}\n"
+    echo "* Compile and install obs-studio..."
     compile_and_install_obs_studio
 
-    printf "${ORANGE}*** Done.${NC}\n"
-
-    popd > /dev/null 2> /dev/null
+    echo "* Done."
 }
 
-set -e
-main
+## ============
+## ==  MAIN  ==
+## ============
+
+pushd ~ > /dev/null
+if [ "$#" == "0" ] || [ "$1" == "help" ]; then
+    usage
+elif [ "$1" == "version" ]; then
+    echo "obsondeb $version"
+elif [ "$1" == "install" ]; then
+    install_all
+elif [ "$1" == "uninstall" ]; then
+    uninstall
+else
+    usage
+    popd > /dev/null
+    exit 1
+fi
+popd > /dev/null
+
+exit 0
