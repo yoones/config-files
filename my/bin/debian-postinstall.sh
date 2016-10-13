@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if ! which sudo > /dev/null; then
-    su root -c "apt-get install sudo && useradd -G sudo username"
+    su root -c "apt-get install sudo && useradd -G sudo $USERNAME"
     echo Please reboot and restart this script
     exit 1
 fi
@@ -12,6 +12,8 @@ if [ "$?" != "0" ]; then
 Something is wrong. At this point, you should be in the sudo group
 but you're not. Please fix it then restart this script.
 If needed, reboot your computer too.
+
+Reminder: usermod -G sudo _username_
 EOF
     exit 1
 fi
@@ -32,17 +34,17 @@ sudo apt-get update
 sudo apt-get dist-upgrade
 
 # install default packages
-sudo apt-get install emacs vlc htop gcc g++ build-essential nmap most\
-     make binutils git unzip unrar valgrind gdb gimp tree gnome-tweak-tool\
-     flashplugin-nonfree firmware-iwlwifi python3-pip pdfmod nasm\
-     qemu-system-x86
+sudo apt-get install emacs vlc htop gcc g++ build-essential nmap most \
+     make binutils git unzip unrar valgrind gdb gimp tree gnome-tweak-tool \
+     flashplugin-nonfree firmware-iwlwifi pdfmod nasm
+     # qemu-system-x86 python3-pip
 
 mkdir -p ~/personal ~/projects
 
 cd ~/projects/
 git clone https://github.com/yoones/config-files.git
 cd config-files
-cp -r my ~/.my
+ln -s $HOME/.my .
 cp bashrc ~/.bashrc
 cp gitconfig ~/.gitconfig
 cp mimeapps.list ~/.config/mimeapps.list
@@ -53,3 +55,10 @@ cd ~/projects
 git clone https://github.com/yoones/railsondeb.git
 cd railsondeb
 ./railsondeb install
+
+# install virtualbox
+sudo apt-get install build-essential linux-headers-`uname -r` dkms
+sudo apt-get install virtualbox
+
+# install obs studio
+# ...
