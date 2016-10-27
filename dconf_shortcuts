@@ -10,15 +10,22 @@ dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-down "['<Primary
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/binding "'<Primary><Alt>v'"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/command "'vlc'"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/name "'VLC'"
+
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/binding "'<Primary><Alt>t'"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command "'gnome-terminal'"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/name "'Terminal'"
+
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding "'<Primary><Alt>f'"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command "'firefox'"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name "'Firefox'"
+
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/binding "'<Primary><Alt>e'"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/command "'nautilus'"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/name "'Nautilus'"
-dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/name "'Nautilus'"
-dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/']"
+
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/binding "'<Primary><Alt>b'"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/command "'vlc /home/yoones/.hd_playlist.m3u'"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/name "'TV'"
+
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/']"
 

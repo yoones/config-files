@@ -1,0 +1,25 @@
+#EXTM3U
+#EXTINF:0,2 - France 2 (HD)
+rtsp://mafreebox.freebox.fr/fbxtv_pub/stream?namespace=1&service=201&flavour=hd
+#EXTINF:0,3 - France 3 (HD)
+rtsp://mafreebox.freebox.fr/fbxtv_pub/stream?namespace=1&service=202&flavour=hd
+#EXTINF:0,5 - France 5 (HD)
+rtsp://mafreebox.freebox.fr/fbxtv_pub/stream?namespace=1&service=203&flavour=hd
+#EXTINF:0,7 - Arte (HD)
+rtsp://mafreebox.freebox.fr/fbxtv_pub/stream?namespace=1&service=204&flavour=hd
+#EXTINF:0,10 - TMC (HD)
+rtsp://mafreebox.freebox.fr/fbxtv_pub/stream?namespace=1&service=497&flavour=hd
+#EXTINF:0,11 - NT1 (HD)
+rtsp://mafreebox.freebox.fr/fbxtv_pub/stream?namespace=1&service=374&flavour=hd
+#EXTINF:0,12 - NRJ 12 (HD)
+rtsp://mafreebox.freebox.fr/fbxtv_pub/stream?namespace=1&service=375&flavour=hd
+#EXTINF:0,13 - La Chaîne Parlementaire (HD)
+rtsp://mafreebox.freebox.fr/fbxtv_pub/stream?namespace=1&service=226&flavour=hd
+#EXTINF:0,14 - France 4 (HD)
+rtsp://mafreebox.freebox.fr/fbxtv_pub/stream?namespace=1&service=376&flavour=hd
+#EXTINF:0,15 - BFM TV (HD)
+rtsp://mafreebox.freebox.fr/fbxtv_pub/stream?namespace=1&service=400&flavour=hd
+#EXTINF:0,19 - France Ô (HD)
+rtsp://mafreebox.freebox.fr/fbxtv_pub/stream?namespace=1&service=238&flavour=hd
+#EXTINF:0,70 - TV5 Monde (HD)
+rtsp://mafreebox.freebox.fr/fbxtv_pub/stream?namespace=1&service=206&flavour=hd

@@ -55,7 +55,9 @@ git clone https://github.com/yoones/config-files.git
 cd config-files
 ln -s $HOME/projects/config-files/my $HOME/.my
 cp bashrc ~/.bashrc
+## todo: emacs
 cp gitconfig ~/.gitconfig
+cp hd_playlist.m3u ~/.hd_playlist.m3u
 cp mimeapps.list ~/.config/mimeapps.list
 bash < ./dconf_shortcuts
 dconf load /org/gnome/terminal/legacy/profiles:/ < ./gnome_term_config
