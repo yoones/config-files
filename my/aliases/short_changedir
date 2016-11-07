@@ -1,4 +1,19 @@
 #!/bin/bash
 
-alias gop="cd $HOME/projects"
 alias gotmp="cd /tmp/toto"
+
+current_gop_file="$HOME/.gop"
+function setgop()
+{
+    echo `pwd` > $current_gop_file
+}
+
+function gop()
+{
+    if [ -f "$HOME/.gop" ]; then
+	cd -- "`cat $current_gop_file`"
+    else
+	cd $HOME/projects
+    fi
+}
+
