@@ -5,14 +5,41 @@ if [ -f Makefile ]; then
     exit 1
 fi
 
-cat <<EOF | base64 -d > Makefile
-IyMKIyMKIyMKIyMKCkNDCQk9CWdjYwpOQU1FCQk9CXBvYwoKU1JDUwkJPQltYWluLmMKCk9CSlMJ
-CT0JJChTUkNTOi5jPS5vKQoKQ0ZMQUdTCQkrPQktVyAtV2FsbCAtV2V4dHJhCkNGTEFHUwkJKz0J
-LWcKQ0ZMQUdTCQkrPQktSSAuCgpMREZMQUdTCQk9CgpSTQkJPQlybSAtcmYKCmFsbAkJOgkkKE5B
-TUUpCgokKE5BTUUpCQk6CSQoT0JKUykKCQkJJChDQykgLW8gJChOQU1FKSAkKE9CSlMpICQoTERG
-TEFHUykKCmNsZWFuCQk6CgkJCSQoUk0pICQoTkFNRSkKCmZjbGVhbgkJOgljbGVhbgoJCQkkKFJN
-KSAkKE9CSlMpCgpyZQkJOglmY2xlYW4gYWxsCgouUEhPTlkJCToJYWxsIGNsZWFuIGZjbGVhbiBy
-ZQo=
+cat <<EOF | > Makefile
+##
+##
+##
+##
+
+CC		=	gcc
+NAME		=	poc
+
+SRCS		=	main.c
+
+OBJS		=	$(SRCS:.c=.o)
+
+CFLAGS		+=	-W -Wall -Wextra
+CFLAGS		+=	-g
+CFLAGS		+=	-I .
+
+#LDFLAGS		=
+
+RM		=	rm -rf
+
+all		:	$(NAME)
+
+$(NAME)		:	$(OBJS)
+			$(CC) -o $(NAME) $(OBJS) $(LDFLAGS)
+
+clean		:
+			$(RM) $(NAME)
+
+fclean		:	clean
+			$(RM) $(OBJS)
+
+re		:	fclean all
+
+.PHONY		:	all clean fclean re
 EOF
 
 exit 0
