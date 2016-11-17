@@ -16,7 +16,7 @@ NAME		=	poc
 
 SRCS		=	main.c
 
-OBJS		=	$(SRCS:.c=.o)
+OBJS		=	\$(SRCS:.c=.o)
 
 CFLAGS		+=	-W -Wall -Wextra
 CFLAGS		+=	-g
@@ -26,16 +26,16 @@ CFLAGS		+=	-I .
 
 RM		=	rm -rf
 
-all		:	$(NAME)
+all		:	\$(NAME)
 
-$(NAME)		:	$(OBJS)
-			$(CC) -o $(NAME) $(OBJS) $(LDFLAGS)
+\$(NAME)		:	\$(OBJS)
+			\$(CC) -o \$(NAME) \$(OBJS) \$(LDFLAGS)
 
 clean		:
-			$(RM) $(NAME)
+			\$(RM) \$(NAME)
 
 fclean		:	clean
-			$(RM) $(OBJS)
+			\$(RM) \$(OBJS)
 
 re		:	fclean all
 
