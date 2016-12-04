@@ -1,32 +1,13 @@
-(require 'color-theme)
-(color-theme-initialize)
-(add-to-list 'load-path "~/.emacs.d/plugins/")
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(defalias 'melpa 'package-list-packages)
 
-;; Exentions matching
+(defun nd () (interactive)
+       (end-of-buffer)
+       (insert (shell-command-to-string "blog-current-datetime.sh"))
+       )
 
-(add-to-list 'auto-mode-alist '("\.rake$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\.gemspec$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\.ru$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\.rb$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\.html.erb$" . html-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-
-;; Color themes
-
-(load "yoones-theme")
-(color-theme-yoones)
-
-
-;; Emacs C mode config
-
-;; (add-hook 'before-save-hook 'whitespace-cleanup)
-(line-number-mode 1)
-(column-number-mode 1)
-(show-paren-mode 1)
-
-;; Arduino
-
-(load "arduino-mode")
-(put 'whitespace-cleanup 'disabled t)
+(defun nt () (interactive)
+       (end-of-buffer)
+       (insert (shell-command-to-string "blog-current-time.sh"))
+       )
