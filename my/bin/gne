@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [ "$#" == "0" ]; then
+    echo "Usage: $0 <args...>"
+    exit 1
+fi
+
+list=$(grep $@ * 2> /dev/null)
+nb_matches=$(echo "$list" | wc -l)
+
+if [ "$nb_matches" == "0" ]; then
+    echo "No match found."
+elif [ "$nb_matches" == "1" ]; then
+    emacs -nw $(echo "$list" | cut -d ':' -f 1)
+else
+    i=1
+    echo "$list" | while read line; do
+			  echo " $i:  $line"
+			  i=$((i+1))
+		      done
+    echo ""
+    echo -n "File to read: "
+    read file_number
+    filename=$(echo "$list" | head -n $file_number | tail -n 1 | cut -d ':' -f 1)
+    if [ "$filename" == "" ]; then
+	echo Bad input
+	exit 1
+    fi
+    emacs -nw $filename
+fi
