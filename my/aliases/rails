@@ -9,6 +9,8 @@ alias goc="gor && cd app/controllers"
 alias gom="gor && cd app/models"
 alias gov="gor && cd app/views"
 alias goa="gor && cd app/assets"
+alias gos="gor && cd app/services"
+alias gosp="gor && cd spec"
 
 function gor()
 {
