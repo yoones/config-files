@@ -15,7 +15,7 @@ def readfile(file)
   fd = File.open(file) or die "Error: open(#{file}) failed"
   lines = []
   fd.readlines.each do |line|
-    lines << line.gsub("\n", "").gsub("\r", "")
+    lines << line.chomp
   end
   fd.close
   lines.reject { |line| line.empty? }
@@ -35,7 +35,7 @@ def readfile(file)
   fd = File.open(file) or die "Error: open(#{file}) failed"
   lines = []
   fd.readlines.each do |line|
-    lines << line.gsub("\n", "").gsub("\r", "")
+    lines << line.chomp
   end
   fd.close
   lines.reject { |line| line.empty? }
