@@ -11,6 +11,12 @@ alias gov="gor && cd app/views"
 alias goa="gor && cd app/assets"
 alias gos="gor && cd app/services"
 alias gosp="gor && cd spec"
+alias gow="gor && cd app/workers"
+
+function gotogem()
+{
+    cd `gem which $1 | rev | cut -d '/' -f 2- | rev`
+}
 
 function gor()
 {
