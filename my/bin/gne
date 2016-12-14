@@ -1,30 +1,60 @@
-#!/bin/bash
+#!/usr/bin/env ruby
 
-if [ "$#" == "0" ]; then
-    echo "Usage: $0 <args...>"
-    exit 1
-fi
+if ARGV.count == 0
+  $stderr.puts "No argument(s) given"
+  exit 1
+end
 
-list=$(grep $@ * 2> /dev/null)
-nb_matches=$(echo "$list" | wc -l)
+def open_file_in_emacs(line)
+  filename, line_number, match = line.split(":")
+  `emacs -nw +#{line_number} #{filename}`
+end
 
-if [ "$nb_matches" == "0" ]; then
-    echo "No match found."
-elif [ "$nb_matches" == "1" ]; then
-    emacs -nw $(echo "$list" | cut -d ':' -f 1)
+def print_files_list(list)
+  i = 0
+  list.each do |line|
+    puts "  #{i} : #{line}"
+    i += 1
+  end
+end
+
+def print_remaining_files(list)
+  first = true
+  list.each do |line|
+    if first
+      puts " => #{line}"
+      first = false
+    else
+      puts "    #{line}"
+    end
+  end
+end
+
+def open_all_files(list)
+  while list.count > 0
+    print_remaining_files list
+    print "Press enter to continue..."
+    $stdin.readline
+    open_file_in_emacs list.first
+    list.shift
+  end
+end
+
+list=`grep -nri $@ * 2> /dev/null`.split("\n")
+
+if list.count == 0
+  $stderr.puts "No match found."
+  exit 1
+elsif list.count == 1
+  open_file_in_emacs list.first
+  exit 0
+end
+
+print_files_list list
+print "File to read: "
+answer = $stdin.readline.chomp
+if answer == '*'
+  open_all_files list
 else
-    i=1
-    echo "$list" | while read line; do
-			  echo " $i:  $line"
-			  i=$((i+1))
-		      done
-    echo ""
-    echo -n "File to read: "
-    read file_number
-    filename=$(echo "$list" | head -n $file_number | tail -n 1 | cut -d ':' -f 1)
-    if [ "$filename" == "" ]; then
-	echo Bad input
-	exit 1
-    fi
-    emacs -nw $filename
-fi
+  open_file_in_emacs list[answer.to_i]
+end
