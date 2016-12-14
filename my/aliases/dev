@@ -6,3 +6,4 @@ alias make='clear ; /usr/bin/make'
 alias fclean='make fclean'
 alias xmake='make re > /dev/null'
 alias st="clear ; git st"
+alias br="git br"
