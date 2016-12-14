@@ -6,7 +6,7 @@ if ARGV.count == 0
 end
 
 def open_file_in_emacs(line)
-  filename, line_number, match = line.split(":")
+  filename, line_number = line.split(":")
   `emacs -nw +#{line_number} #{filename}`
 end
 
@@ -40,7 +40,7 @@ def open_all_files(list)
   end
 end
 
-list=`grep -nri $@ * 2> /dev/null`.split("\n")
+list=`grep -nri #{ARGV.join(" ")} * 2> /dev/null`.split("\n")
 
 if list.count == 0
   $stderr.puts "No match found."
@@ -51,6 +51,7 @@ elsif list.count == 1
 end
 
 print_files_list list
+puts ""
 print "File to read: "
 answer = $stdin.readline.chomp
 if answer == '*'
