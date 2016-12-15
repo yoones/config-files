@@ -17,3 +17,4 @@ function gop()
     fi
 }
 
+export P=`cat $current_gop_file`

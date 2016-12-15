@@ -62,3 +62,15 @@ function reset_db()
 	return 1
     fi
 }
+
+function rlm()
+{
+    # rails list models
+
+    previous_pwd=$OLD_PWD
+    current_pwd=$(pwd)
+    gom || return 1
+    ls | sed "s/^/  /g"
+    cd "$current_pwd"
+    export OLD_PWD="$previous_pwd"
+}
