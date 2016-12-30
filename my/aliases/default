@@ -8,7 +8,6 @@ alias llh='ll -h'
 alias llah='ll -ah'
 alias clean='rm -f *~ ; rm -f .*~ ; rm -f \#*\#'
 alias ccl='clean ; clear ; pwd ; ll'
-alias ne='emacs -nw'
 alias sne='sudo emacs -nw'
 alias df='df -h'
 alias j='jobs'
@@ -21,3 +20,16 @@ alias wif="watch ifconfig"
 alias rgrep="grep -r"
 alias rigrep="grep -ri"
 alias gri="grep -ri"
+# alias ne='emacs -nw'
+
+function ne()
+{
+    nb_lines=$(echo "$1" | tr ':' '\n' | wc -l | tr -d '\n')
+    if [ "$nb_lines" == "2" ]; then
+	filename=$(echo -n "$1" | cut -d ':' -f 1)
+	line=$(echo -n "$1" | cut -d ':' -f 2)
+	emacs -nw "+$line" "$filename"
+    else
+	emacs -nw "$1"
+    fi
+}
