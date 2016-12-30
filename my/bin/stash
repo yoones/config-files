@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+git status
+git branch
+
+echo "Press enter to continue..."
+read
+
+git stash
+git stash clear
