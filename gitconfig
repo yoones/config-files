@@ -9,5 +9,7 @@
 	st = status
 	br = branch
 	df = diff
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	fdf = diff --no-prefix -U1000
 [core]
 	editor = emacs -nw
