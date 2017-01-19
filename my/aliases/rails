@@ -74,3 +74,8 @@ function rlm()
     cd "$current_pwd"
     export OLD_PWD="$previous_pwd"
 }
+
+function rspec-doc()
+{
+    rspec $@ --dry-run --format documentation
+}
