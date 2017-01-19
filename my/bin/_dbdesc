@@ -1,0 +1,74 @@
+#!/usr/bin/env ruby
+
+if ARGV.count == 0
+  $stderr.puts "Usage: dbdesc <path/to/schema.rb> [table]"
+  exit 1
+end
+
+@schema = {}
+
+class T
+  attr_reader :fields
+
+  def initialize
+    @fields = []
+  end
+
+  def index(*args)
+  end
+
+  def method_missing(name, *args, &block)
+    @fields << {name: args[0], type: name}
+  end
+end
+
+def add_index(*args)
+end
+
+def create_table(name, *args, &block)
+  t = T.new
+  block.call(t)
+  @schema[name] = t.fields
+end
+
+module ActiveRecord
+  module Schema
+    def define(version:, &block)
+      @schema = {}
+      block.call
+      @schema
+    end
+    module_function :define
+  end
+end
+
+eval IO.read(ARGV[0])
+
+if ARGV.count == 1
+  @schema.each do |k, v|
+    puts k
+  end
+  exit 0
+end
+
+table_name = ARGV[1]
+
+unless @schema.has_key?(table_name)
+  $stderr.puts "Error: table not found"
+  exit 1
+end
+
+puts "Table: #{table_name}"
+
+max_length = 0
+@schema[table_name].each do |field|
+  max_length = field[:name].length if max_length < field[:name].length
+end
+
+@schema[table_name].each do |field|
+  print "  "
+  print field[:name]
+  (max_length - field[:name].length).times { print " " }
+  print "  : #{field[:type]}"
+  puts ""
+end

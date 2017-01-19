@@ -79,3 +79,15 @@ function rspec-doc()
 {
     rspec $@ --dry-run --format documentation
 }
+
+function dbdesc()
+{
+    path=`find_rails_app_root.rb`
+    if [ "$?" == "0" ]; then
+	_dbdesc "$path/db/schema.rb" $@
+	return 0
+    else
+	echo "Error: no rails app found" > /dev/stderr
+	return 1
+    fi
+}
