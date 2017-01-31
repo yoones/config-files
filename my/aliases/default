@@ -3,7 +3,7 @@
 alias l='ls'
 alias ll='ls -l'
 alias lla='ll -a'
-alias lld='ll -d'
+alias lld='ll -d * | grep ^d'
 alias llh='ll -h'
 alias llah='ll -ah'
 alias clean='rm -f *~ ; rm -f .*~ ; rm -f \#*\#'

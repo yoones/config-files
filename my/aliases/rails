@@ -12,6 +12,7 @@ alias goa="gor && cd app/assets"
 alias gos="gor && cd app/services"
 alias gosp="gor && cd spec"
 alias gow="gor && cd app/workers"
+alias rnobs="grep -v -e assets -e 'views/' -e 'Binary file'"
 
 function gotogem()
 {
