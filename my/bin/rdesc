@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # -*- coding: utf-8 -*-
 
-# Tools
+# Tools
 def _colorize(text, color_code)
   "\e[#{color_code}m#{text}\e[0m"
 end
@@ -20,6 +20,12 @@ def _section(text)
 end
 
 # Info extractors
+def model_inheritance(model)
+  _section "[Inheritance]"
+  parent_class = `grep class "app/models/#{model}.rb" | head -n 1 | cut -d '<' -f 2 | tr -d ' ' | tr -d '\n'`
+  puts "  #{parent_class}"
+end
+
 def model_validations(model)
   _section "[Validations]"
   puts `grep "validate" "app/models/#{model}.rb" || echo "Warning: No validation found"`
@@ -33,7 +39,7 @@ def model_associations(model)
   associations << `grep "has_one" "app/models/#{model}.rb"`
   associations << `grep "has_and_belongs_to_many" "app/models/#{model}.rb"`
   associations.each do |a|
-    puts a unless a.length < 3 # avoid empty lines
+    puts a unless a.length < 3 # avoid empty lines
   end
 end
 
@@ -89,6 +95,8 @@ ARGV.each do |m|
   _model model
 
   if File.exists?("app/models/#{model}.rb")
+    model_inheritance(model)
+    puts ""
     model_associations(model)
     puts ""
     model_validations(model)
