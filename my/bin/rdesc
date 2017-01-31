@@ -101,6 +101,7 @@ ARGV.each do |m|
     model = model[0...(model.length - 3)]
   end
   _model model
+  puts ""
 
   if File.exists?("app/models/#{model}.rb")
     model_inheritance(model)
