@@ -20,10 +20,14 @@ def _section(text)
 end
 
 # Info extractors
+
+@db_name = nil
+
 def model_inheritance(model)
   _section "[Inheritance]"
   parent_class = `grep class "app/models/#{model}.rb" | head -n 1 | cut -d '<' -f 2 | tr -d ' ' | tr -d '\n'`
   puts "  #{parent_class}"
+  @db_name = parent_class.downcase if parent_class != "ActiveRecord::Base"
 end
 
 def model_validations(model)
@@ -46,6 +50,7 @@ end
 def model_description(model)
   _section "[Table description]"
 
+  model = @db_name unless @db_name.nil?
   file = File.new("db/schema.rb", "r")
   while (line = file.gets)
     if line.include?("  create_table \"#{model}s\"")
