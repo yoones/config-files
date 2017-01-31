@@ -97,6 +97,9 @@ end
 # ..Output
 ARGV.each do |m|
   model = m.downcase
+  if model.length > 3 && model[-3..-1] == ".rb"
+    model = model[0...(model.length - 3)]
+  end
   _model model
 
   if File.exists?("app/models/#{model}.rb")
