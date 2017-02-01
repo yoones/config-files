@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 # -*- coding: utf-8 -*-
 
+require "active_support/inflector"
+
 # Tools
 def _colorize(text, color_code)
   "\e[#{color_code}m#{text}\e[0m"
@@ -51,9 +53,11 @@ def model_description(model)
   _section "[Table description]"
 
   model = @db_name unless @db_name.nil?
+  model = model.pluralize
+
   file = File.new("db/schema.rb", "r")
   while (line = file.gets)
-    if line.include?("  create_table \"#{model}s\"")
+    if line.include?("  create_table \"#{model}\"")
       puts line
       while (line = file.gets)
         puts line
