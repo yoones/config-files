@@ -97,6 +97,16 @@ end
 # ..Output
 ARGV.each do |m|
   model = m.downcase
+  options = %w(i a v d) # inheritance associations validations database
+  if model.include?(":")
+    o = model.split(":")
+    if o.count != 2 || o.last.length == 0
+      $stderr.puts "Error: bad filtering"
+      exit 1
+    end
+    options = o.last.split("")
+    model = o.first
+  end
   if model.length > 3 && model[-3..-1] == ".rb"
     model = model[0...(model.length - 3)]
   end
@@ -104,13 +114,22 @@ ARGV.each do |m|
   puts ""
 
   if File.exists?("app/models/#{model}.rb")
-    model_inheritance(model)
-    puts ""
-    model_associations(model)
-    puts ""
-    model_validations(model)
-    puts ""
-    model_description(model)
+
+    if options.include? "i"
+      model_inheritance(model)
+      puts ""
+    end
+    if options.include? "a"
+      model_associations(model)
+      puts ""
+    end
+    if options.include? "v"
+      model_validations(model)
+      puts ""
+    end
+    if options.include? "d"
+      model_description(model)
+    end
   else
     $stderr.puts "Model not found."
   end
