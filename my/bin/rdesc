@@ -23,13 +23,10 @@ end
 
 # Info extractors
 
-@db_name = nil
-
 def model_inheritance(model)
   _section "[Inheritance]"
   parent_class = `grep class "app/models/#{model}.rb" | head -n 1 | cut -d '<' -f 2 | tr -d ' ' | tr -d '\n'`
   puts "  #{parent_class}"
-  @db_name = parent_class.downcase if parent_class != "ActiveRecord::Base"
 end
 
 def model_validations(model)
@@ -116,6 +113,11 @@ ARGV.each do |m|
   end
   _model model
   puts ""
+
+  @db_name = nil
+  parent_class = `grep class "app/models/#{model}.rb" | head -n 1 | cut -d '<' -f 2 | tr -d ' ' | tr -d '\n'`
+  @db_name = parent_class != "ActiveRecord::Base" ? parent_class.downcase  : nil
+
 
   if File.exists?("app/models/#{model}.rb")
 
