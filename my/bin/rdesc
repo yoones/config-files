@@ -116,7 +116,7 @@ ARGV.each do |m|
 
   @db_name = nil
   parent_class = `grep class "app/models/#{model}.rb" | head -n 1 | cut -d '<' -f 2 | tr -d ' ' | tr -d '\n'`
-  @db_name = parent_class != "ActiveRecord::Base" ? parent_class.downcase  : nil
+  @db_name = (parent_class != "ActiveRecord::Base" && parent_class != "ApplicationRecord") ? parent_class.downcase  : nil
 
 
   if File.exists?("app/models/#{model}.rb")
