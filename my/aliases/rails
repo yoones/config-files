@@ -31,7 +31,7 @@ function gor()
     fi
 }
 
-function gogems()
+function gotogems()
 {
     path=`find_ruby_gems.rb`
     if [ "$?" == "0" ]; then
