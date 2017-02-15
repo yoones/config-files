@@ -8,3 +8,4 @@ alias xmake='make re > /dev/null'
 alias st="clear ; git st"
 alias br="git br"
 alias git-changed-files-since="git df --name-only"
+alias lg="git lg|head -n 30"
