@@ -13,3 +13,4 @@
 	fdf = diff --no-prefix -U1000
 [core]
 	editor = emacs -nw
+	excludesfile = /home/yoones/.gitignore
