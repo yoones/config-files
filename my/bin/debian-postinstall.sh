@@ -27,7 +27,7 @@ fi
 
 cat /etc/group | grep "^sudo:" | grep $USERNAME > /dev/null
 if [ "$?" != "0" ]; then
-    cat <<EOF 
+    cat <<EOF
 Something is wrong. At this point, you should be in the sudo group
 but you're not. Please fix it then restart this script.
 If needed, reboot your computer too.
@@ -57,6 +57,7 @@ ln -s $HOME/projects/config-files/my $HOME/.my
 cp bashrc ~/.bashrc
 ## todo: emacs
 cp gitconfig ~/.gitconfig
+cp gitignore ~/.gitignore
 cp hd_playlist.m3u ~/.hd_playlist.m3u
 cp mimeapps.list ~/.config/mimeapps.list
 bash < ./dconf_shortcuts
