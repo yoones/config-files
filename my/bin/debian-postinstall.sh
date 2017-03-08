@@ -45,7 +45,7 @@ sudo apt-get dist-upgrade -y
 sudo apt-get install -y emacs vlc htop gcc g++ build-essential nmap most \
      make binutils git unzip unrar valgrind gdb gimp tree gnome-tweak-tool \
      flashplugin-nonfree firmware-iwlwifi pdfmod nasm \
-     soundconverter
+     soundconverter colordiff
      # qemu-system-x86 python3-pip
 
 mkdir -p ~/personal ~/projects
