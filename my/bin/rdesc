@@ -25,7 +25,7 @@ end
 
 def model_inheritance(model)
   _section "[Inheritance]"
-  parent_class = `grep class "app/models/#{model}.rb" | head -n 1 | cut -d '<' -f 2 | tr -d ' ' | tr -d '\n'`
+  parent_class = `grep "^[ ]*class" "app/models/#{model}.rb" | head -n 1 | cut -d '<' -f 2 | tr -d ' ' | tr -d '\n'`
   puts "  #{parent_class}"
 end
 
@@ -115,7 +115,7 @@ ARGV.each do |m|
   puts ""
 
   @db_name = nil
-  parent_class = `grep class "app/models/#{model}.rb" | head -n 1 | cut -d '<' -f 2 | tr -d ' ' | tr -d '\n'`
+  parent_class = `grep "^[ ]*class" "app/models/#{model}.rb" | head -n 1 | cut -d '<' -f 2 | tr -d ' ' | tr -d '\n'`
   @db_name = (parent_class != "ActiveRecord::Base" && parent_class != "ApplicationRecord") ? parent_class.downcase  : nil
 
 
