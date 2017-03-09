@@ -6,7 +6,7 @@ current_gop_file="$HOME/.gop"
 function setgop()
 {
     echo `pwd` > $current_gop_file
-    export P=`cat $current_gop_file`
+    export P=`pwd`
 }
 
 function gop()
@@ -16,6 +16,7 @@ function gop()
     else
 	cd $HOME/projects
     fi
+    export P=`pwd`
 }
 
 export P=`cat $current_gop_file`
