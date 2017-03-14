@@ -14,3 +14,5 @@
 [core]
 	editor = emacs -nw
 	excludesfile = /home/yoones/.gitignore
+[pull]
+	rebase = true
