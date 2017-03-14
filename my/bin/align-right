@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
+
+lefts = []
+rights = []
+max_left_length = 0
+
+while a = $stdin.gets
+  fields = a.split(ARGV.first)
+  lefts << "#{fields.first}#{ARGV.first}"
+  max_left_length = lefts.last.length if lefts.last.length > max_left_length
+  fields.shift
+  rights << fields.join(ARGV.first)
+end
+
+while lefts.count > 0
+  print lefts.first
+  (max_left_length - lefts.first.length).times do
+    print " "
+  end
+  print " "
+  puts rights.first
+  lefts.shift
+  rights.shift
+end
