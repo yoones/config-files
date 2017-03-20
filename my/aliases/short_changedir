@@ -8,6 +8,7 @@ function setgop()
     echo `pwd` > $current_gop_file
     export P=`pwd`
 }
+alias setp="setgop"
 
 function gop()
 {
