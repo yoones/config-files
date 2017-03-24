@@ -37,5 +37,12 @@ function ne()
 
 function nel()
 {
-    emacs -nw $(ls | tail -n 1)
+    if [ "$#" == "0" ]; then
+	emacs -nw $(ls | tail -n 1)
+    elif [ "$#" == "1"]; then
+	emacs -nw $(ls "$1" | tail -n 1)
+    else
+	echo "Error: bad arguments"
+	exit 1
+    fi
 }
