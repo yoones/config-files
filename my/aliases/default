@@ -34,3 +34,8 @@ function ne()
 	emacs -nw "$1"
     fi
 }
+
+function nel()
+{
+    emacs -nw $(ls | tail -n 1)
+}
