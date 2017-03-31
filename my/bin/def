@@ -4,6 +4,7 @@
 require "rubygems"
 require "nokogiri"
 require 'open-uri'
+require "cgi"
 
 if ARGV.count != 1
   $stderr.puts "Usage: #{$0} (word)"
@@ -12,7 +13,7 @@ end
 
 begin
   word = ARGV.first
-  url = "http://dictionary.reference.com/browse/#{word}"
+  url = "http://dictionary.reference.com/browse/#{CGI.escape(word)}"
   page = Nokogiri::HTML(open(url))
   if page.class.to_s != "Nokogiri::HTML::Document"
     $stderr.puts "Error: failed to load web page"
