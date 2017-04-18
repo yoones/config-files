@@ -9,6 +9,7 @@ function setgop()
     export P=`pwd`
 }
 alias setp="setgop"
+alias sp="setp"
 
 function gop()
 {
