@@ -7,5 +7,6 @@ alias fclean='make fclean'
 alias xmake='make re > /dev/null'
 alias st="clear ; git st"
 alias br="git br"
+alias cbr="git br | grep '*' | cut -d ' ' -f 2-"
 alias git-changed-files-since="git df --name-only"
 alias lg="git lg|head -n 30"
