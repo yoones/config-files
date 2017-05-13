@@ -5,15 +5,16 @@ alias rs='rails s'
 alias rc='rails c'
 alias rr="rrout"
 alias migrate="rake db:migrate"
-alias goc="gor && cd app/controllers"
-alias gom="gor && cd app/models"
-alias gov="gor && cd app/views"
-alias goa="gor && cd app/assets"
-alias gos="gor && cd app/services"
-alias gosp="gor && cd spec"
-alias gosps="gosp && cd services"
-alias gospc="gosp && cd controllers"
-alias gow="gor && cd app/workers"
+alias goc="gor app/controllers"
+alias gom="gor app/models"
+alias gov="gor app/views"
+alias goa="gor app/assets"
+alias gos="gor app/services"
+alias gol="gor config/locales"
+alias gosp="gor spec"
+alias gosps="gor spec/services"
+alias gospc="gor spec/controllers"
+alias gow="gor app/workers"
 alias rnobs="grep -v -e assets -e 'views/' -e 'Binary file' -e 'tmp/' -e 'public/' -e 'log/' -e 'poc/'"
 alias rnobs-strict="rnobs | grep -v -e 'spec/' -e 'db/' -e 'config/' -e README"
 
@@ -28,7 +29,7 @@ function gor()
     # 2) Git repository
     path=`find_rails_app_root.rb`
     if [ "$?" == "0" ]; then
-	cd $path
+	cd "$path/$1"
 	return 0
     else
 	git rev-parse --git-dir > /dev/null 2> /dev/null
