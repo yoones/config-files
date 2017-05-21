@@ -29,9 +29,20 @@ function gor()
     # 2) Git repository
     path=`find_rails_app_root.rb`
     if [ "$?" == "0" ]; then
-	cd "$path/$1"
+	if [ "$1" != "" ]; then
+	    if [ -f "$path/$1" ]; then
+		cd "$path/$1"
+	    else
+		return 1
+	    fi
+	else
+	    cd "$path"
+	fi
 	return 0
     else
+	if [ "$1" != "" ]; then
+	    return 1
+	fi
 	git rev-parse --git-dir > /dev/null 2> /dev/null
 	if [ "$?" == "0" ]; then
 	    cd "$(git rev-parse --git-dir)/.."
