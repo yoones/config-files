@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+require "tty"
+
+current_dir = Dir.pwd
+
+while File.exist?("todo") == false && Dir.pwd != "/"
+  Dir.chdir("..")
+end
+
+if File.exist?("todo")
+  puts `cat todo`
+  exit 0
+else
+  exit 1
+end
