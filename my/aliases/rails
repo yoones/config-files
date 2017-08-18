@@ -93,7 +93,11 @@ function rlm()
     previous_pwd=$OLD_PWD
     current_pwd=$(pwd)
     gom || return 1
-    ls | sed "s/^/  /g"
+    if [ "$1" == "" ]; then
+	ls | sed "s/^/  /g"
+    else
+	ls | sed "s/^/  /g" | grep "$1"
+    fi
     cd "$current_pwd"
     export OLD_PWD="$previous_pwd"
 }
