@@ -26,6 +26,11 @@ def readjsonfile(file)
   JSON.parse(data)
 end
 
+class My
+  def initialize
+  end
+end
+
 EOF
 else
 cat > poc.rb <<EOF
@@ -39,6 +44,11 @@ def readfile(file)
   end
   fd.close
   lines.reject { |line| line.empty? }
+end
+
+class My
+  def initialize
+  end
 end
 
 EOF
