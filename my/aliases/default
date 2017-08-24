@@ -22,6 +22,7 @@ alias rigrep="grep -ri"
 alias gri="grep -ri"
 # alias ne='emacs -nw'
 alias cdiff="colordiff"
+alias g="grep"
 
 function ne()
 {
