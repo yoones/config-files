@@ -24,6 +24,20 @@ alias gri="grep -ri"
 alias cdiff="colordiff"
 alias g="grep"
 
+function net()
+{
+    route -n | grep "^0.0.0.0" | rev | cut -d ' ' -f 1 | rev
+    iwconfig 2> /dev/null | grep ESSID | rev | cut -d ':' -f 1 | rev | cut -d '"' -f 2
+}
+
+function net!()
+{
+    route -n | grep "^0.0.0.0" | rev | cut -d ' ' -f 1 | rev
+    iwconfig 2> /dev/null | grep ESSID | rev | cut -d ':' -f 1 | rev | cut -d '"' -f 2
+    echo ""
+    route
+}
+
 function ne()
 {
     nb_lines=$(echo "$1" | tr ':' '\n' | wc -l | tr -d '\n')
