@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+require 'yaml'
+
+# def cmp_strict(a, b); a == b; end
+# def cmp_case_insensitive(a, b); a.downcase == b.downcase; end
+
+# cmp = "cmp_strict"
+# if ARGV.first == "-i"
+#   cmp = "cmp_case_insensitive"
+#   ARGV.shift
+# end
+
+unless ARGV.count > 1
+  # $stderr.puts "Usage: yaml-path [-i] <filepath> <key1> [<key2> ...]"
+  $stderr.puts "Usage: yaml-path <filepath> <key1> [<key2> ...]"
+  exit 1
+end
+
+def print_path(input, key, root="")
+  if input.is_a?(Array)
+    puts "#{root}#{key}" if input.include?(key)
+  elsif input.is_a?(Hash)
+    input.each do |k,v|
+      puts "#{root}#{key}" if k == key
+      print_path(v, key, "#{root}#{k}.")
+    end
+  else
+    puts "#{root}#{key}" if input.to_s == key
+  end
+end
+
+input = YAML.load_file(ARGV.first)
+ARGV.shift
+ARGV.each do |key|
+  puts "#{key}:"
+  print_path(input, key, "  ")
+  puts "---"
+end
