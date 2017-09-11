@@ -25,3 +25,6 @@
 (global-set-key (kbd "M-<down>") 'shrink-window)
 (global-set-key (kbd "M-<right>") 'enlarge-window-horizontally)
 (global-set-key (kbd "M-<left>") 'shrink-window-horizontally)
+(put 'downcase-region 'disabled nil)
+
+(custom-set-variables '(coffee-tab-width 2))
