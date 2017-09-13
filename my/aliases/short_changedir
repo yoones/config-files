@@ -1,6 +1,7 @@
 #!/bin/bash
 
 alias gotmp="cd /tmp/toto"
+alias fu="cd $HOME/projects/fu"
 
 current_gop_file="$HOME/.gop"
 function setgop()

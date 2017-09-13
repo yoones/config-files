@@ -48,7 +48,7 @@ sudo apt-get install -y emacs vlc htop gcc g++ build-essential nmap most \
      soundconverter colordiff
      # qemu-system-x86 python3-pip
 
-mkdir -p ~/personal ~/projects
+mkdir -p ~/personal ~/projects/fu/current_task
 
 cd ~/projects/
 git clone https://github.com/yoones/config-files.git
