@@ -82,6 +82,7 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 eval "`ls $HOME/.my/aliases/ | sed 's/^/source \$HOME\/\.my\/aliases\//g'`"
+eval "`ls $HOME/.my/autocomplete/ | sed 's/^/source \$HOME\/\.my\/autocomplete\//g'`"
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -95,6 +96,7 @@ if ! shopt -oq posix; then
 fi
 
 export PAGER='most'
+export EDITOR='emacs -nw'
 PATH=$PATH:/sbin
 PATH=$PATH:$HOME/.my/bin # Add personal scripts
 mkdir -p /tmp/toto

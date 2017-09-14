@@ -107,6 +107,11 @@ function rlm()
     export OLD_PWD="$previous_pwd"
 }
 
+function rlm_complete()
+{
+    rlm $@ | sed "s/^  //g" | sed 's/\.rb$//g'
+}
+
 function rspec-doc()
 {
     rspec $@ --dry-run --format documentation
