@@ -1,6 +1,10 @@
 #!/usr/bin/env ruby
 require 'yaml'
 
+# todo:
+# - partial match
+# - display line number for each match
+
 # def cmp_strict(a, b); a == b; end
 # def cmp_case_insensitive(a, b); a.downcase == b.downcase; end
 
