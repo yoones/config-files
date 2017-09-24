@@ -17,10 +17,12 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+;; Hide and show blocks of text
 (global-set-key (kbd "C-c C-h") (lambda() (interactive) (hide-region-hide) (keyboard-quit)))
 (global-set-key (kbd "C-c C-s") (lambda() (interactive) (hide-region-unhide) (keyboard-quit)))
 (put 'upcase-region 'disabled nil)
 
+;; Resize buffers with keyboard arrows
 (global-set-key (kbd "M-<up>") 'enlarge-window)
 (global-set-key (kbd "M-<down>") 'shrink-window)
 (global-set-key (kbd "M-<right>") 'enlarge-window-horizontally)
@@ -28,3 +30,6 @@
 (put 'downcase-region 'disabled nil)
 
 (custom-set-variables '(coffee-tab-width 2))
+
+;; Don't break hard links (for docker)
+(setq backup-by-copying t)
