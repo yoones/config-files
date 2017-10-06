@@ -6,7 +6,7 @@ if [ "$USERNAME" == "root" ]; then
 fi
 
 if ! which sudo > /dev/null; then
-    sudo sed -i "s/main/main contrib non-free/g" /etc/apt/sources.list
+    su root -c "sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list"
     su root -c "apt-get update && apt-get install sudo && usermod -G sudo $USERNAME"
     echo Please logout/reboot and restart this script
     exit 1
