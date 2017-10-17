@@ -6,9 +6,17 @@ alias make='clear ; /usr/bin/make'
 alias fclean='make fclean'
 alias xmake='make re > /dev/null'
 alias st="clear ; git st"
-alias br="git br"
 alias cbr="git br | grep '*' | cut -d ' ' -f 2-"
 alias git-changed-files-since="git df --name-only"
 alias lg="git lg|head -n 30"
 alias dk="docker-compose"
 alias gdf="git df"
+
+function br()
+{
+    if [ "$#" == "0" ]; then
+	git br
+    else
+	git br | grep $@
+    fi
+}
