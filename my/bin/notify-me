@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# requires notify-send
+# debian stretch package: libnotify-bin
+
 if [ "$#" == "0" ]; then
     echo "Error: no command given"
     echo "Usage: $0 <command> [<arg> ...]"
