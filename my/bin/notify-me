@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ "$#" == "0" ]; then
+    echo "Error: no command given"
+    echo "Usage: $0 <command> [<arg> ...]"
+fi
+
+C="$1 "
+shift
+for i in "$@"; do
+    i="${i//\\/\\\\}"
+    C="$C \"${i//\"/\\\"}\""
+done
+
+bash -i -c "source ~/.bashrc && $C"
+
+if [ "$?" == "0" ]; then
+    notify-send SUCCESS "$C"
+else
+    notify-send FAILURE "$C"
+fi
