@@ -35,15 +35,12 @@ function gor()
     path=`find_rails_app_root.rb`
     if [ "$?" == "0" ]; then
 	if [ "$1" != "" ]; then
-	    if [ -d "$path/$1" ]; then
-		cd "$path/$1"
-	    else
-		return 1
+	    path="$path/$1"
+	    if [ "$2" != "" ]; then
+		path=$(echo "$path/$2*")
 	    fi
-	else
-	    cd "$path"
 	fi
-	return 0
+	cd $path
     else
 	if [ "$1" != "" ]; then
 	    return 1
