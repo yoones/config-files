@@ -31,8 +31,11 @@ sudo apt-get dist-upgrade -y
 # install default packages
 sudo apt-get install -y emacs vlc htop gcc g++ build-essential nmap most \
      make binutils git unzip unrar valgrind gdb gimp tree gnome-tweak-tool \
-     flashplugin-nonfree firmware-iwlwifi pdfmod \
-     soundconverter colordiff
+     firmware-iwlwifi pdfmod \
+     soundconverter colordiff mosh
+# flashplugin-nonfree
+# firmware-atheros intel-microcode
+# (docker) apt-transport-https ca-certificates curl gnupg2 software-properties-common dirmngr ; apt-get update : apt-get install docker-engine ; docker-compose from web
 
 mkdir -p ~/personal ~/projects/fu/current_task
 
