@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 if [ "$USERNAME" == "root" ]; then
     echo "You should not run this script as root"
     exit 1
@@ -30,19 +32,35 @@ sudo apt-get dist-upgrade -y
 
 # install default packages
 sudo apt-get install -y emacs vlc htop gcc g++ build-essential nmap most \
-     make binutils git unzip unrar valgrind gdb gimp tree gnome-tweak-tool \
-     firmware-iwlwifi pdfmod \
-     soundconverter colordiff mosh
+     make binutils gcc git unzip valgrind gdb gimp tree gnome-tweak-tool \
+     pdfmod \
+     mosh
+# for dell xps 13: firmware-atheros intel-microcode
+# firmware-iwlwifi
 # flashplugin-nonfree
-# firmware-atheros intel-microcode
-# (docker) apt-transport-https ca-certificates curl gnupg2 software-properties-common dirmngr ; apt-get update : apt-get install docker-engine ; docker-compose from web
+sudo apt-get install apt-transport-https ca-certificates curl gnupg2 software-properties-common dirmngr
+curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | sudo apt-key add -
+sudo add-apt-repository \
+     "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
+   $(lsb_release -cs) \
+   stable"
+sudo apt-get update
+sudo apt-get install docker-ce
+if [ ! -f "/usr/local/bin/docker-compose" ]; then
+    sudo curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose
+fi
 
 mkdir -p ~/personal ~/projects/fu/current_task
 
 cd ~/projects/
-git clone https://github.com/yoones/config-files.git
+if [ ! -d "./config-files" ]; then
+    git clone https://github.com/yoones/config-files.git
+fi
 cd config-files
-ln -s $HOME/projects/config-files/my $HOME/.my
+if [ ! -L "$HOME/.my" ]; then
+    ln -s $HOME/projects/config-files/my $HOME/.my
+fi
 cp bashrc ~/.bashrc
 cp emacs ~/.emacs
 cp -r emacs.d ~/.emacs.d
@@ -54,6 +72,8 @@ bash < ./dconf_shortcuts
 dconf load /org/gnome/terminal/legacy/profiles:/ < ./gnome_term_config
 
 cd ~/projects
-git clone https://github.com/yoones/railsondeb.git
+if [ ! -d "./railsondeb" ]; then
+    git clone https://github.com/yoones/railsondeb.git
+fi
 cd railsondeb
 ./railsondeb install
