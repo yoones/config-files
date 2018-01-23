@@ -6,6 +6,12 @@ require "nokogiri"
 require 'open-uri'
 require "cgi"
 
+display_url = false
+if ARGV.first == "-u"
+  display_url = true
+  ARGV.shift
+end
+
 if ARGV.count != 1
   $stderr.puts "Usage: #{$0} (word)"
   exit 1
@@ -14,6 +20,7 @@ end
 begin
   word = ARGV.first
   url = "http://dictionary.reference.com/browse/#{CGI.escape(word)}"
+  puts url if display_url
   page = Nokogiri::HTML(open(url))
   if page.class.to_s != "Nokogiri::HTML::Document"
     $stderr.puts "Error: failed to load web page"
