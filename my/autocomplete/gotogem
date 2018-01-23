@@ -1,0 +1,10 @@
+#!/bin/bash
+
+_gotogem ()
+{
+    COMPREPLY=();
+    local word="${COMP_WORDS[COMP_CWORD]}";
+    COMPREPLY=($(compgen -W "$(gem list | cat)" -- "$word"));
+}
+
+complete -F _gotogem gotogem
