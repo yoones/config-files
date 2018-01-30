@@ -19,6 +19,7 @@ alias gospc="gor spec/controllers"
 alias gow="gor app/workers"
 alias rnobs="grep -v -e assets -e 'views/' -e 'Binary file' -e 'tmp/' -e 'public/' -e 'log/' -e 'poc/'"
 alias rnobs-strict="rnobs | grep -v -e 'spec/' -e 'db/' -e 'config/' -e README"
+alias rspecd="rspec --format documentation"
 
 function rd()
 {
@@ -126,4 +127,9 @@ function dbdesc()
 	echo "Error: no rails app found" > /dev/stderr
 	return 1
     fi
+}
+
+function rspecit()
+{
+    alias x="clear ; rspec '$1'"
 }
