@@ -12,9 +12,11 @@ alias goa="gor app/assets"
 alias goaj="gor app/assets/javascripts"
 alias goas="gor app/assets/stylesheets"
 alias gos="gor app/services"
+alias got="gor app/transactions"
 alias gol="gor config/locales"
 alias gosp="gor spec"
 alias gosps="gor spec/services"
+alias gospt="gor spec/transactions"
 alias gospc="gor spec/controllers"
 alias gow="gor app/workers"
 alias rnobs="grep -v -e assets -e 'views/' -e 'Binary file' -e 'tmp/' -e 'public/' -e 'log/' -e 'poc/'"
@@ -86,6 +88,20 @@ function reset_db()
 	rake db:create
 	rake db:migrate
 	rake db:seed
+	return 0
+    else
+	echo "Error: no rails app found" > /dev/stderr
+	return 1
+    fi
+}
+
+function reset_test_db()
+{
+    path=`find_rails_app_root.rb`
+    if [ "$?" == "0" ]; then
+	rake.test db:drop
+	rake.test db:create
+	rake.test db:migrate
 	return 0
     else
 	echo "Error: no rails app found" > /dev/stderr
