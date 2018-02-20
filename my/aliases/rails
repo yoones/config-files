@@ -49,10 +49,12 @@ function gor()
 	    return 1
 	fi
     fi
-    path=`solve_path.rb $path $@`
-    if [ "$?" != "0" ]; then
-	echo "Error: subpath not found"
-	return 1
+    if [ "$1" != "" ]; then
+	path=`solve_path.rb $path $@`
+	if [ "$?" != "0" ]; then
+	    echo "Error: subpath not found"
+	    return 1
+	fi
     fi
     cd $path
 }
