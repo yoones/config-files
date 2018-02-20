@@ -40,26 +40,21 @@ function gor()
     # 1) Rails app
     # 2) Git repository
     path=`find_rails_app_root.rb`
-    if [ "$?" == "0" ]; then
-	if [ "$1" != "" ]; then
-	    path="$path/$1"
-	    if [ "$2" != "" ]; then
-		path=$(echo "$path/$2*")
-	    fi
-	fi
-	cd $path
-    else
-	if [ "$1" != "" ]; then
-	    return 1
-	fi
+    if [ "$?" != "0" ]; then
 	git rev-parse --git-dir > /dev/null 2> /dev/null
 	if [ "$?" == "0" ]; then
-	    cd "$(git rev-parse --git-dir)/.."
+	    path="$(git rev-parse --git-dir)/.."
 	else
 	    echo "Error: no rails app nor git repository found" > /dev/stderr
 	    return 1
 	fi
     fi
+    path=`solve_path.rb $path $@`
+    if [ "$?" != "0" ]; then
+	echo "Error: subpath not found"
+	return 1
+    fi
+    cd $path
 }
 
 function gotogems()
