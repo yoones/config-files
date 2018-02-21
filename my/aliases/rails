@@ -22,8 +22,11 @@ alias gow="gor app/workers"
 alias rnobs="grep -v -e assets -e 'views/' -e 'Binary file' -e 'tmp/' -e 'public/' -e 'log/' -e 'poc/'"
 alias rnobs-strict="rnobs | grep -v -e 'spec/' -e 'db/' -e 'config/' -e README"
 alias rspecd="rspec --format documentation"
-alias rake.test="RAILS_ENV=test rake"
-alias rails.test="RAILS_ENV=test rails"
+alias rake.test="RAILS_ENV=test bundle exec rake"
+alias rails.test="RAILS_ENV=test bundle exec rails"
+alias rails="bundle exec rails"
+alias rake="bundle exec rake"
+alias rspec="bundle exec rspec"
 
 function rd()
 {
@@ -147,4 +150,15 @@ function dbdesc()
 function rspecit()
 {
     alias x="clear ; rspec '$1'"
+    alias n="emacs -nw '$1'"
+}
+
+function gc()
+{
+    cd $(pwd | sed 's/\/spec\//\/app\//g')
+}
+
+function gs()
+{
+    cd $(pwd | sed 's/\/app\//\/spec\//g')
 }
