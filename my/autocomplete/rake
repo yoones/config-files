@@ -1,0 +1,10 @@
+#!/bin/bash
+
+_rake ()
+{
+    COMPREPLY=();
+    local word="${COMP_WORDS[COMP_CWORD]}";
+    COMPREPLY=($(compgen -W "$(rake -T 2>/dev/null | cut -d ' ' -f 2)" -- "$word"));
+}
+
+complete -F _rake rake
