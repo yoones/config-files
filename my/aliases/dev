@@ -1,5 +1,14 @@
 #!/bin/bash
 
+function docker-compose()
+{
+    if [ -f "./docker-compose.yml" ]; then
+	/usr/local/bin/docker-compose $@
+    else
+	(cd ~/.default_docker && /usr/local/bin/docker-compose $@)
+    fi
+}
+
 alias gdb="\gdb -q"
 alias v='valgrind --track-origins=yes --leak-check=full'
 alias make='clear ; /usr/bin/make'
@@ -11,6 +20,7 @@ alias git-changed-files-since="git df --name-only"
 alias lg="git lg|head -n 30"
 alias dk="docker-compose"
 alias gdf="git df"
+alias gdfc="git df --cached"
 
 function br()
 {
