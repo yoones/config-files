@@ -77,19 +77,14 @@ function gotogems()
 
 function rrout()
 {
-    rake routes | grep "$1"
+    bundle exec rake routes | grep "$1"
 }
 
 function reset_db()
 {
     path=`find_rails_app_root.rb`
     if [ "$?" == "0" ]; then
-	rm -f "$path/db/development.sqlite3"
-	rm -f "$path/db/test.sqlite3"
-	bundle exec rake db:create
-	bundle exec rake db:migrate
-	bundle exec rake db:seed
-	return 0
+	bundle exec rake db:drop db:create db:migrate db:seed
     else
 	echo "Error: no rails app found" > /dev/stderr
 	return 1

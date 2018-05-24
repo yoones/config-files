@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require 'bigdecimal'
+require 'pry'
+
+def bigd(v)
+  BigDecimal.new(v, 14)
+end
+
+binding.pry

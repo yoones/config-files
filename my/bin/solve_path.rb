@@ -8,7 +8,7 @@ end
 path = "#{ARGV.shift}/"
 until ARGV.empty?
   path = Dir.glob("#{path}#{ARGV.shift}*/").first
-  exit 1 if path == ""
+  exit 1 if path.nil?
 end
 puts path
 exit 0
