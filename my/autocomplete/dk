@@ -1,0 +1,10 @@
+#!/bin/bash
+
+_dk ()
+{
+    COMPREPLY=();
+    local word="${COMP_WORDS[COMP_CWORD]}";
+    COMPREPLY=($(compgen -W "$(dump_docker_compose_services.rb)" -- "$word"));
+}
+
+complete -F _dk dk
