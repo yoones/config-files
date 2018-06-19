@@ -17,7 +17,7 @@ if ARGV.count != 1
   exit 1
 end
 
-begin
+def get_page
   word = ARGV.first
   url = "http://dictionary.reference.com/browse/#{CGI.escape(word)}"
   puts url if display_url
@@ -26,12 +26,31 @@ begin
     $stderr.puts "Error: failed to load web page"
     exit 1
   end
+end
+
+def print_definitions(page)
   i = 1
-  page.css('div[class=def-content]').each do |d|
+  definitions = page.css('span[class="css-9sn2pa e10vl5dg6"]')
+  definitions.each do |d|
     definition = d.text.gsub("\n", "")
     puts "#{i}. #{definition.strip.gsub(/[ ]{2,}/, ' ')}"
     i += 1
   end
+end
+
+def print_suggestions(page)
+  suggestions = page.css('a[class="css-1t9y0kj e19m0k9k1"]')
+  suggestions.each do |d|
+    suggestion = d.text.gsub("\n", "")
+    $stderr.puts "Did you mean #{suggestion.strip.gsub(/[ ]{2,}/, ' ')}?"
+    i += 1
+  end
+end
+
+begin
+  page = get_page
+  print_definitions(page)
+  print_suggestions(page)
   exit 0
 rescue
   $stderr.puts "Error: #{$!}"
