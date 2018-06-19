@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker rm -f $(docker ps -a | cut -d ' ' -f 1 | grep -v CONTAINER)
+# docker rmi -f $(docker images -aq) # deletes all images. you'll do a pull again after this
