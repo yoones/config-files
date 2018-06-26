@@ -7,7 +7,7 @@ end
 
 path = "#{ARGV.shift}/"
 until ARGV.empty?
-  path = Dir.glob("#{path}#{ARGV.shift}*/").first
+  path = Dir.glob("#{path}#{ARGV.shift}*/").sort_by(&:length).first
   exit 1 if path.nil?
 end
 puts path
