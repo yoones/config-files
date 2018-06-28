@@ -41,6 +41,7 @@ def print_definitions(page)
 end
 
 def print_suggestions(page)
+  i = 1
   suggestions = page.css('a[class="css-1t9y0kj e19m0k9k1"]')
   suggestions.each do |d|
     suggestion = d.text.gsub("\n", "")
