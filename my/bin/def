@@ -6,6 +6,9 @@ require "nokogiri"
 require 'open-uri'
 require "cgi"
 
+# BASE_URL = "http://dictionary.reference.com"
+BASE_URL = "https://www.dictionary.com"
+
 @display_url = false
 if ARGV.first == "-u"
   @display_url = true
@@ -19,7 +22,7 @@ end
 
 def get_page
   word = ARGV.first
-  url = "http://dictionary.reference.com/browse/#{CGI.escape(word)}"
+  url = "#{BASE_URL}/browse/#{CGI.escape(word)}"
   puts url if @display_url
   page = Nokogiri::HTML(open(url))
   if page.class.to_s != "Nokogiri::HTML::Document"
