@@ -2,25 +2,31 @@
 # coding: utf-8
 
 already_played = []
+current_title = ""
 
 while true
-  titles = `wmctrl -l | grep Firefox | cut -d ' ' -f 5- | sed 's/ - Spotify - Mozilla Firefox//g'`.split("\n")
-  title = ""
-  titles.each do |t|
-    if t[0] == "▶"
-      title = t
-      break
-    end
-  end
-  if title[0] != "▶"
+  title = `wmctrl -l | grep Firefox | grep '·' | cut -d ' ' -f 5- | sed 's/ - Spotify//g'| sed 's/ - Mozilla Firefox//g'`
+  title = title.
+          tr(
+            'àáäâãèéëẽêìíïîĩòóöôõùúüûũñçÀÁÄÂÃÈÉËẼÊÌÍÏÎĨÒÓÖÔÕÙÚÜÛŨÑÇ·',
+            'aaaaaeeeeeiiiiiooooouuuuuncAAAAAEEEEEIIIIIOOOOOUUUUUNC-'
+          ).
+          gsub("\n", "").
+          gsub("\r", "").
+          gsub(/[^[:ascii:]]/, '')
+  # unless title.length == 0
+  #   title.split('').each { |c| puts "(#{c}) => #{c.ord}" unless /[a-zA-Z0-9\.]/.match(c) }
+  #   puts " "
+  # end
+  if title != current_title
     `pkill pacat`
     sleep 0.1
-    next
+    # next
   end
-  title.gsub!("▶ ", "")
   if already_played.include?(title)
     sleep 0.1
   else
+    current_title = title
     puts title
     `pkill pacat`
     already_played << title
