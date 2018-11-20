@@ -35,7 +35,7 @@ end
 
 def print_definitions(page)
   i = 1
-  definitions = page.css('span[class="css-9sn2pa e10vl5dg6"]')
+  definitions = page.css('span[class="one-click-content css-9sn2pa e1q3nk1v4"]')
   definitions.each do |d|
     definition = d.text.gsub("\n", "")
     puts "#{i}. #{definition.strip.gsub(/[ ]{2,}/, ' ')}"
